@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFDF9;
+    --peach: #FFB6A3;
+    --pink: #FF8FAB;
+    --text: #4A4A4A;
+    --peach-soft: #FFE3DB;
+    --pink-soft: #FFE0EA;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    font-family:'Gowun Dodum', sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    transition: opacity .6s ease;
+  }
+
+  body.leaving{ opacity:0; }
+
+  h1, h2, .logo, .enter-btn, .dot-label{
+    font-family:'Jua', sans-serif;
+  }
+
+  /* ---------- 상단 로고 ---------- */
+  .logo{
+    position:fixed;
+    top:28px; left:32px;
+    font-size:1.25rem;
+    color:var(--pink);
+    letter-spacing:0.5px;
+    z-index:20;
+    user-select:none;
+  }
+
+  /* ---------- 무한 루프 스크롤 컨테이너 ---------- */
+  .scroll-container{
+    height:100vh;
+    overflow-y:scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior:smooth;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+  }
+  .scroll-container::-webkit-scrollbar{ display:none; }
+
+  .section{
+    height:100vh;
+    width:100%;
+    scroll-snap-align:start;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    padding:0 24px;
+  }
+
+  /* 섹션별 배경 톤 (복숭아 / 핑크 / 화이트 조합, 배경>포인트>강조 비중 유지) */
+  .section--hero{ background:var(--bg); }
+  .section--a{ background: linear-gradient(180deg, var(--bg) 0%, var(--peach-soft) 100%); }
+  .section--b{ background: linear-gradient(180deg, var(--bg) 0%, var(--pink-soft) 100%); }
+  .section--c{ background:var(--bg); }
+
+  /* ---------- 떠다니는 블롭 장식 ---------- */
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:0.55;
+    animation: float 6s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .blob1{ width:140px; height:140px; background:var(--peach); top:12%; left:8%; animation-delay:0s; }
+  .blob2{ width:90px;  height:90px;  background:var(--pink);  bottom:15%; right:10%; animation-delay:1.2s; }
+  .blob3{ width:60px;  height:60px;  background:var(--peach); bottom:20%; left:15%; animation-delay:2s; }
+  .blob4{ width:110px; height:110px; background:var(--pink);  top:18%; right:12%; animation-delay:0.6s; }
+
+  @keyframes float{
+    0%, 100%{ transform:translateY(0) scale(1); }
+    50%{ transform:translateY(-22px) scale(1.06); }
+  }
+
+  /* ---------- 히어로 섹션 ---------- */
+  .hero-title{
+    font-size:clamp(3rem, 9vw, 5.5rem);
+    color:var(--text);
+    line-height:1.1;
+    z-index:2;
+  }
+  .hero-title .accent{ color:var(--pink); }
+
+  .hero-tagline{
+    margin-top:18px;
+    font-size:clamp(1rem, 2.2vw, 1.25rem);
+    color:var(--text);
+    opacity:0.85;
+    z-index:2;
+  }
+
+  .enter-btn{
+    margin-top:44px;
+    z-index:2;
+    display:inline-block;
+    padding:16px 52px;
+    font-size:1.15rem;
+    color:#fff;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    border:none;
+    border-radius:999px;
+    text-decoration:none;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,143,171,0.35);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+  }
+  .enter-btn:hover{
+    transform:scale(1.08) translateY(-4px);
+    box-shadow:0 12px 26px rgba(255,143,171,0.45);
+  }
+  .enter-btn:active{
+    transform:scale(0.97);
+  }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:38px;
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.6;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    z-index:2;
+  }
+  .scroll-hint .arrow{
+    font-size:1.2rem;
+    color:var(--pink);
+    animation:bounceArrow 1.6s ease-in-out infinite;
+  }
+  @keyframes bounceArrow{
+    0%, 100%{ transform:translateY(0); }
+    50%{ transform:translateY(8px); }
+  }
+
+  /* ---------- 데코 섹션 텍스트 ---------- */
+  .deco-emoji{
+    font-size:clamp(2.4rem, 6vw, 3.4rem);
+    margin-bottom:14px;
+    z-index:2;
+  }
+  .deco-title{
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    color:var(--text);
+    z-index:2;
+  }
+  .deco-sub{
+    margin-top:12px;
+    font-size:clamp(0.95rem, 2vw, 1.1rem);
+    color:var(--text);
+    opacity:0.75;
+    z-index:2;
+    max-width:520px;
+  }
+
+  /* ---------- 우측 점 네비게이션 ---------- */
+  .dot-nav{
+    position:fixed;
+    right:26px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    z-index:20;
+  }
+  .dot{
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--peach-soft);
+    border:2px solid transparent;
+    cursor:pointer;
+    transition: background .3s ease, transform .3s ease;
+  }
+  .dot.active{
+    background:var(--pink);
+    transform:scale(1.3);
+  }
+
+  @media (max-width:640px){
+    .logo{ top:18px; left:20px; font-size:1.05rem; }
+    .dot-nav{ right:14px; gap:10px; }
+    .enter-btn{ padding:14px 40px; font-size:1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="logo">Portfolio</div>
+
+  <nav class="dot-nav" aria-label="섹션 이동">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+    <div class="dot" data-index="3"></div>
+  </nav>
+
+  <div class="scroll-container" id="scrollContainer">
+
+    <!-- 클론: 마지막 섹션 (위쪽 무한루프용) -->
+    <section class="section section--c" aria-hidden="true">
+      <div class="blob blob1"></div><div class="blob blob2"></div>
+      <div class="deco-emoji">✨</div>
+      <h2 class="deco-title">계속 이어지는 이야기</h2>
+      <p class="deco-sub">스크롤을 내리면 처음으로 자연스럽게 돌아와요</p>
+    </section>
+
+    <!-- 0. 히어로 -->
+    <section class="section section--hero" data-real="0">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+      <div class="blob blob4"></div>
+      <h1 class="hero-title">Portfolio<span class="accent">.</span></h1>
+      <p class="hero-tagline">진행 중인 프로젝트들을 한 곳에 모아 소개합니다 🍑</p>
+      <a href="list.html" class="enter-btn" id="enterBtn">ENTER</a>
+      <div class="scroll-hint">
+        <span>SCROLL</span>
+        <span class="arrow">⌄</span>
+      </div>
+    </section>
+
+    <!-- 1 -->
+    <section class="section section--a" data-real="1">
+      <div class="blob blob2"></div><div class="blob blob3"></div>
+      <div class="deco-emoji">🍑</div>
+      <h2 class="deco-title">채용 담당자님, 반갑습니다</h2>
+      <p class="deco-sub">이곳에서 저의 프로젝트들을 편하게 둘러봐 주세요</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="section section--b" data-real="2">
+      <div class="blob blob1"></div><div class="blob blob4"></div>
+      <div class="deco-emoji">💗</div>
+      <h2 class="deco-title">8개의 프로젝트가 준비 중이에요</h2>
+      <p class="deco-sub">하나씩 완성되는 대로 채워나갈 예정이에요</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="section section--c" data-real="3">
+      <div class="blob blob1"></div><div class="blob blob2"></div>
+      <div class="deco-emoji">✨</div>
+      <h2 class="deco-title">계속 이어지는 이야기</h2>
+      <p class="deco-sub">스크롤을 내리면 처음으로 자연스럽게 돌아와요</p>
+    </section>
+
+    <!-- 클론: 첫 섹션 (아래쪽 무한루프용) -->
+    <section class="section section--hero" aria-hidden="true">
+      <div class="blob blob1"></div><div class="blob blob4"></div>
+      <h1 class="hero-title">Portfolio<span class="accent">.</span></h1>
+      <p class="hero-tagline">진행 중인 프로젝트들을 한 곳에 모아 소개합니다 🍑</p>
+    </section>
+
+  </div>
+
+<script>
+(function(){
+  const container = document.getElementById('scrollContainer');
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const REAL_COUNT = 4;              // 실제 섹션 수
+  const TOTAL = REAL_COUNT + 2;      // 앞뒤 클론 포함 총 섹션 수
+
+  function sectionHeight(){ return container.clientHeight; }
+
+  // 시작 위치: 클론이 아닌 첫 실제 섹션(index 1)로 즉시 이동
+  container.scrollTop = sectionHeight();
+
+  let snapTimer = null;
+
+  function currentIndex(){
+    return Math.round(container.scrollTop / sectionHeight());
+  }
+
+  function updateDots(index){
+    const realIndex = ((index - 1) % REAL_COUNT + REAL_COUNT) % REAL_COUNT;
+    dots.forEach((d,i) => d.classList.toggle('active', i === realIndex));
+  }
+
+  function handleLoop(){
+    const index = currentIndex();
+    const h = sectionHeight();
+
+    if(index <= 0){
+      container.style.scrollBehavior = 'auto';
+      container.scrollTop = REAL_COUNT * h;   // 마지막 실제 섹션으로 순간 이동
+      requestAnimationFrame(() => { container.style.scrollBehavior = 'smooth'; });
+    } else if(index >= TOTAL - 1){
+      container.style.scrollBehavior = 'auto';
+      container.scrollTop = 1 * h;            // 첫 실제 섹션으로 순간 이동
+      requestAnimationFrame(() => { container.style.scrollBehavior = 'smooth'; });
+    }
+    updateDots(index);
+  }
+
+  container.addEventListener('scroll', () => {
+    updateDots(currentIndex());
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(handleLoop, 140);
+  }, { passive:true });
+
+  window.addEventListener('resize', () => {
+    // 리사이즈 시 실제 섹션 기준으로 재정렬
+    const realIndex = ((currentIndex() - 1) % REAL_COUNT + REAL_COUNT) % REAL_COUNT;
+    container.style.scrollBehavior = 'auto';
+    container.scrollTop = (realIndex + 1) * sectionHeight();
+    requestAnimationFrame(() => { container.style.scrollBehavior = 'smooth'; });
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = parseInt(dot.dataset.index, 10) + 1;
+      container.scrollTo({ top: target * sectionHeight(), behavior:'smooth' });
+    });
+  });
+
+  // ENTER 버튼: 부드러운 페이드 전환 후 리스트 페이지로 이동
+  document.getElementById('enterBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    const href = this.getAttribute('href');
+    document.body.classList.add('leaving');
+    setTimeout(() => { window.location.href = href; }, 550);
+  });
+})();
+</script>
+
+</body>
+</html>

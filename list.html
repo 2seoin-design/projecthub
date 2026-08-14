@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portfolio · Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFDF9;
+    --peach: #FFB6A3;
+    --pink: #FF8FAB;
+    --text: #4A4A4A;
+    --peach-soft: #FFE3DB;
+    --pink-soft: #FFE0EA;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{ height:100%; }
+
+  body{
+    font-family:'Gowun Dodum', sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    opacity:0;
+    animation: fadeIn .6s ease forwards;
+  }
+
+  @keyframes fadeIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  h1, h2, h3, .logo{ font-family:'Jua', sans-serif; }
+
+  a{ text-decoration:none; color:inherit; }
+
+  /* ---------- 상단 로고 / 뒤로가기 ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 40px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .logo{ font-size:1.25rem; color:var(--pink); }
+  .back-link{
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.7;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--peach-soft);
+    transition: background .25s ease, opacity .25s ease;
+  }
+  .back-link:hover{ background:var(--peach-soft); opacity:1; }
+
+  /* ---------- 자기소개 섹션 ---------- */
+  .intro{
+    max-width:1080px;
+    margin:20px auto 60px;
+    padding:0 40px;
+    text-align:center;
+  }
+  .intro-avatar{
+    width:88px; height:88px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.2rem;
+  }
+  .intro-name{
+    font-size:clamp(1.6rem, 4vw, 2.1rem);
+    color:var(--text);
+  }
+  .intro-role{
+    display:inline-block;
+    margin-top:10px;
+    font-size:0.95rem;
+    color:var(--pink);
+    background:var(--pink-soft);
+    padding:6px 18px;
+    border-radius:999px;
+  }
+  .intro-line{
+    margin-top:16px;
+    font-size:clamp(1rem, 2.2vw, 1.15rem);
+    color:var(--text);
+    opacity:0.85;
+  }
+
+  /* ---------- 프로젝트 카드 가로 스크롤 갤러리 (양 끝 화살표, 무한 루프) ---------- */
+  .slider-heading{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 40px;
+    text-align:center;
+    font-size:0.85rem;
+    color:var(--text);
+    opacity:0.55;
+    margin-bottom:24px;
+  }
+
+  .gallery{
+    position:relative;
+    max-width:900px;
+    margin:0 auto 100px;
+    padding:0 76px;
+  }
+
+  .gallery-viewport{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 16px, black calc(100% - 16px), transparent);
+    mask-image: linear-gradient(90deg, transparent, black 16px, black calc(100% - 16px), transparent);
+  }
+  .gallery-viewport::-webkit-scrollbar{ display:none; }
+
+  .gallery-track{
+    display:flex;
+    align-items:stretch;
+  }
+
+  .arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:52px; height:52px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    color:#fff;
+    font-size:1.6rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 18px rgba(255,143,171,0.32);
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+    z-index:5;
+  }
+  .arrow:hover{ transform:translateY(-50%) scale(1.12); box-shadow:0 12px 24px rgba(255,143,171,0.42); }
+  .arrow:active{ transform:translateY(-50%) scale(0.94); }
+  .arrow-left{ left:0; }
+  .arrow-right{ right:0; }
+
+  .card{
+    position:relative;
+    flex:0 0 auto;
+    width:240px;
+    margin:0 10px;
+    background:#fff;
+    border:1px solid var(--peach-soft);
+    border-radius:22px;
+    padding:32px 26px;
+    cursor:pointer;
+    text-align:left;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, border-color .3s ease;
+    box-shadow:0 4px 14px rgba(255,182,163,0.12);
+  }
+  .card:hover{
+    transform:scale(1.05) translateY(-4px);
+    box-shadow:0 12px 26px rgba(255,143,171,0.25);
+    border-color:var(--pink);
+  }
+  .card:active{ transform:scale(0.98); }
+
+  .badge{
+    display:inline-block;
+    font-size:0.72rem;
+    color:#fff;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    padding:4px 12px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+
+  .card-title{
+    font-size:1.15rem;
+    color:var(--text);
+  }
+  .card-desc{
+    margin-top:8px;
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.7;
+    line-height:1.5;
+  }
+  .card-emoji{
+    position:absolute;
+    top:26px; right:26px;
+    font-size:1.4rem;
+    opacity:0.5;
+  }
+
+  @media (max-width:720px){
+    .topbar{ padding:22px 24px; }
+    .intro{ padding:0 24px; margin-bottom:44px; }
+    .gallery{ padding:0 54px; margin-bottom:80px; }
+    .arrow{ width:42px; height:42px; font-size:1.3rem; }
+    .card{ width:190px; padding:24px 18px; margin:0 6px; }
+  }
+
+  /* ---------- 토스트 ---------- */
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:40px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--text);
+    color:#fff;
+    padding:14px 26px;
+    border-radius:999px;
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .3s ease, transform .3s ease;
+    z-index:50;
+    box-shadow:0 8px 22px rgba(0,0,0,0.15);
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo">Portfolio</div>
+    <a class="back-link" href="index.html">← 처음으로</a>
+  </div>
+
+  <section class="intro">
+    <div class="intro-avatar">🍑</div>
+    <h1 class="intro-name">이서인</h1>
+    <span class="intro-role">Frontend Developer</span>
+    <p class="intro-line">사용자 경험을 고민하며 꾸준히 만들어가는 개발자입니다.</p>
+  </section>
+
+  <p class="slider-heading">화살표를 눌러 카드를 앞뒤로 넘겨보세요</p>
+
+  <div class="gallery">
+    <button class="arrow arrow-left" id="prevBtn" aria-label="이전 카드">‹</button>
+
+    <div class="gallery-viewport" id="galleryViewport">
+      <div class="gallery-track" id="galleryTrack">
+        <!-- clone: Project 08 (맨 앞, 왼쪽 무한루프용) -->
+        <div class="card" data-real="7" aria-hidden="true">
+          <span class="card-emoji">💗</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 08</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <!-- 실제 카드 1~8 -->
+        <div class="card" data-real="0">
+          <span class="card-emoji">🍑</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 01</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="1">
+          <span class="card-emoji">💗</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 02</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="2">
+          <span class="card-emoji">✨</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 03</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="3">
+          <span class="card-emoji">🍑</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 04</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="4">
+          <span class="card-emoji">💗</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 05</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="5">
+          <span class="card-emoji">✨</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 06</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="6">
+          <span class="card-emoji">🍑</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 07</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <div class="card" data-real="7">
+          <span class="card-emoji">💗</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 08</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+        <!-- clone: Project 01 (맨 뒤, 오른쪽 무한루프용) -->
+        <div class="card" data-real="0" aria-hidden="true">
+          <span class="card-emoji">🍑</span>
+          <span class="badge">Coming Soon</span>
+          <h3 class="card-title">Project 01</h3>
+          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="arrow arrow-right" id="nextBtn" aria-label="다음 카드">›</button>
+  </div>
+
+  <div class="toast" id="toast">🍑 준비 중입니다!</div>
+
+<script>
+(function(){
+  const toast = document.getElementById('toast');
+  const viewport = document.getElementById('galleryViewport');
+  const track = document.getElementById('galleryTrack');
+  const cards = Array.from(track.children);   // 10 슬롯: [clone8, 1,2,3,4,5,6,7,8, clone1]
+  const REAL_COUNT = 8;
+
+  let currentSlot = 1;      // 시작: 실제 1번 카드 (slot index 1)
+  let hideTimer = null;
+  let isBusy = false;
+  let rafId = null;
+
+  // 카드가 뷰포트 정중앙에 오도록 좌우 여백 확보 (양 끝 카드도 중앙 정렬 가능하게)
+  function setTrackPadding(){
+    const pad = Math.max(viewport.clientWidth / 2, 0);
+    track.style.paddingLeft = pad + 'px';
+    track.style.paddingRight = pad + 'px';
+  }
+
+  function scrollLeftFor(slot){
+    const el = cards[slot];
+    return el.offsetLeft - (viewport.clientWidth - el.offsetWidth) / 2;
+  }
+
+  function easeInOutCubic(t){
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  // 직접 스크롤 위치를 애니메이션시켜서, 슬라이드가 끝나는 순간 바로 이어붙이기 판단을 할 수 있게 함
+  function animateScrollTo(target, duration, onDone){
+    cancelAnimationFrame(rafId);
+    const start = viewport.scrollLeft;
+    const change = target - start;
+    if(Math.abs(change) < 1){ onDone && onDone(); return; }
+    const startTime = performance.now();
+    function step(now){
+      const t = Math.min((now - startTime) / duration, 1);
+      viewport.scrollLeft = start + change * easeInOutCubic(t);
+      if(t < 1){
+        rafId = requestAnimationFrame(step);
+      } else {
+        onDone && onDone();
+      }
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function goToSlot(slot, animate, onDone){
+    currentSlot = slot;
+    const left = scrollLeftFor(slot);
+    if(animate){
+      animateScrollTo(left, 420, onDone);
+    } else {
+      viewport.scrollLeft = left;
+      onDone && onDone();
+    }
+  }
+
+  function go(delta){
+    if(isBusy) return;
+    isBusy = true;
+    goToSlot(currentSlot + delta, true, () => {
+      // 슬라이드가 끝나자마자 바로 이어붙여서 끊기는 틈 없이 자연스럽게 순환
+      if(currentSlot === 0){
+        goToSlot(REAL_COUNT, false);       // 왼쪽 클론(08) → 진짜 08
+      } else if(currentSlot === cards.length - 1){
+        goToSlot(1, false);                // 오른쪽 클론(01) → 진짜 01
+      }
+      isBusy = false;
+    });
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+  document.getElementById('nextBtn').addEventListener('click', () => go(1));
+
+  track.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if(!card) return;
+    toast.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  });
+
+  window.addEventListener('resize', () => {
+    setTrackPadding();
+    goToSlot(currentSlot, false);
+  });
+
+  // 초기 세팅: 애니메이션 없이 1번 카드로
+  setTrackPadding();
+  goToSlot(1, false);
+})();
+</script>
+
+</body>
+</html>
