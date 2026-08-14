@@ -48,6 +48,20 @@
     user-select:none;
   }
 
+  .about-link{
+    position:fixed;
+    top:28px; right:32px;
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.7;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--peach-soft);
+    z-index:20;
+    transition: background .25s ease, opacity .25s ease;
+  }
+  .about-link:hover{ background:var(--peach-soft); opacity:1; }
+
   /* ---------- 무한 루프 스크롤 컨테이너 ---------- */
   .scroll-container{
     height:100vh;
@@ -206,6 +220,7 @@
 
   @media (max-width:640px){
     .logo{ top:18px; left:20px; font-size:1.05rem; }
+    .about-link{ top:16px; right:20px; font-size:0.8rem; padding:6px 12px; }
     .dot-nav{ right:14px; gap:10px; }
     .enter-btn{ padding:14px 40px; font-size:1.05rem; }
   }
@@ -214,6 +229,7 @@
 <body>
 
   <div class="logo">Portfolio</div>
+  <a class="about-link" href="about.html">About</a>
 
   <nav class="dot-nav" aria-label="섹션 이동">
     <div class="dot active" data-index="0"></div>
