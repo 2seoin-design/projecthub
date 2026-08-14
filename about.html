@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portfolio · About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFDF9;
+    --peach: #FFB6A3;
+    --pink: #FF8FAB;
+    --text: #4A4A4A;
+    --peach-soft: #FFE3DB;
+    --pink-soft: #FFE0EA;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{ height:100%; }
+
+  body{
+    font-family:'Gowun Dodum', sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    opacity:0;
+    animation: fadeIn .6s ease forwards;
+  }
+
+  @keyframes fadeIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  h1, h2, h3, .logo{ font-family:'Jua', sans-serif; }
+
+  a{ text-decoration:none; color:inherit; }
+
+  /* ---------- 상단 로고 / 뒤로가기 ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 40px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .logo{ font-size:1.25rem; color:var(--pink); }
+  .back-link{
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.7;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--peach-soft);
+    transition: background .25s ease, opacity .25s ease;
+  }
+  .back-link:hover{ background:var(--peach-soft); opacity:1; }
+
+  /* ---------- 자기소개 섹션 ---------- */
+  .intro{
+    max-width:720px;
+    margin:20px auto 60px;
+    padding:0 40px;
+    text-align:center;
+  }
+  .intro-avatar{
+    width:96px; height:96px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.4rem;
+  }
+  .intro-name{
+    font-size:clamp(1.6rem, 4vw, 2.1rem);
+    color:var(--text);
+  }
+  .intro-role{
+    display:inline-block;
+    margin-top:10px;
+    font-size:0.95rem;
+    color:var(--pink);
+    background:var(--pink-soft);
+    padding:6px 18px;
+    border-radius:999px;
+  }
+  .intro-line{
+    margin-top:18px;
+    font-size:clamp(1rem, 2.2vw, 1.1rem);
+    color:var(--text);
+    opacity:0.85;
+    line-height:1.7;
+  }
+
+  /* ---------- 특징 3개 ---------- */
+  .features{
+    max-width:1080px;
+    margin:0 auto 80px;
+    padding:0 40px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .feature-card{
+    background:#fff;
+    border:1px solid var(--peach-soft);
+    border-radius:22px;
+    padding:32px 26px;
+    text-align:center;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, border-color .3s ease;
+    box-shadow:0 4px 14px rgba(255,182,163,0.12);
+  }
+  .feature-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 26px rgba(255,143,171,0.25);
+    border-color:var(--pink);
+  }
+  .feature-emoji{
+    font-size:2.2rem;
+    margin-bottom:14px;
+  }
+  .feature-title{
+    font-size:1.1rem;
+    color:var(--text);
+  }
+  .feature-desc{
+    margin-top:10px;
+    font-size:0.9rem;
+    color:var(--text);
+    opacity:0.7;
+    line-height:1.6;
+  }
+
+  /* ---------- 문의 버튼 ---------- */
+  .contact{
+    text-align:center;
+    padding:0 40px 90px;
+  }
+  .contact-title{
+    font-size:clamp(1.3rem, 3vw, 1.7rem);
+    color:var(--text);
+    margin-bottom:14px;
+  }
+  .contact-sub{
+    font-size:0.95rem;
+    color:var(--text);
+    opacity:0.7;
+    margin-bottom:30px;
+  }
+  .contact-btn{
+    display:inline-block;
+    padding:16px 52px;
+    font-size:1.1rem;
+    color:#fff;
+    background:linear-gradient(135deg, var(--peach), var(--pink));
+    border-radius:999px;
+    box-shadow:0 8px 20px rgba(255,143,171,0.35);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+  }
+  .contact-btn:hover{
+    transform:scale(1.08) translateY(-4px);
+    box-shadow:0 12px 26px rgba(255,143,171,0.45);
+  }
+  .contact-btn:active{ transform:scale(0.97); }
+
+  /* ---------- 푸터 ---------- */
+  footer{
+    text-align:center;
+    padding:28px 24px 36px;
+    font-size:0.82rem;
+    color:var(--text);
+    opacity:0.55;
+    border-top:1px solid var(--peach-soft);
+  }
+
+  @media (max-width:720px){
+    .topbar{ padding:22px 24px; }
+    .intro{ padding:0 24px; margin-bottom:44px; }
+    .features{ grid-template-columns:1fr; padding:0 24px; margin-bottom:60px; gap:16px; }
+    .contact{ padding:0 24px 70px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo">Portfolio</div>
+    <a class="back-link" href="index.html">← 처음으로</a>
+  </div>
+
+  <section class="intro">
+    <div class="intro-avatar">🍑</div>
+    <h1 class="intro-name">이서인</h1>
+    <span class="intro-role">Frontend Developer</span>
+    <p class="intro-line">
+      사용자 경험을 고민하며 꾸준히 만들어가는 개발자입니다.<br>
+      작은 디테일이 만드는 큰 차이를 믿고, 완성도 있는 결과물을 만들기 위해 노력합니다.
+    </p>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-emoji">🍑</div>
+      <h3 class="feature-title">꼼꼼한 구현</h3>
+      <p class="feature-desc">디테일한 인터랙션과 반응형 레이아웃까지 세심하게 다듬습니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">💗</div>
+      <h3 class="feature-title">사용자 중심 사고</h3>
+      <p class="feature-desc">보기 좋은 화면보다 쓰기 편한 화면을 먼저 고민합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">✨</div>
+      <h3 class="feature-title">꾸준한 성장</h3>
+      <p class="feature-desc">새로운 기술을 배우고 프로젝트에 적용하며 계속 발전합니다.</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2 class="contact-title">함께 이야기 나누고 싶어요</h2>
+    <p class="contact-sub">궁금한 점이나 제안이 있다면 편하게 연락 주세요</p>
+    <a class="contact-btn" href="mailto:leeseoin12345678@gmail.com">문의하기</a>
+  </section>
+
+  <footer>
+    &copy; 2026 이서인. All rights reserved.
+  </footer>
+
+</body>
+</html>
