@@ -136,6 +136,10 @@
   .carousel-track{
     display:flex;
     align-items:stretch;
+    transition: transform .5s cubic-bezier(.34, 1.15, .4, 1);
+  }
+  .carousel-track.no-anim{
+    transition:none;
   }
 
   .arrow{
@@ -307,17 +311,17 @@
           <h3 class="card-title">뉴스 검색</h3>
           <p class="card-desc">키워드로 뉴스를 검색하고 원하는 기사를 빠르게 찾아볼 수 있어요.</p>
         </div>
-        <div class="card" data-real="2">
-          <span class="card-emoji">✨</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 03</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        <div class="card" data-real="2" data-link="https://news-search-iota.vercel.app/">
+          <span class="card-emoji">🌤️</span>
+          <span class="badge">완성</span>
+          <h3 class="card-title">World Weather Landmarks</h3>
+          <p class="card-desc">세계 주요 도시와 랜드마크의 날씨 정보를 한눈에 확인할 수 있어요.</p>
         </div>
-        <div class="card" data-real="3">
-          <span class="card-emoji">🍑</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 04</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        <div class="card" data-real="3" data-link="https://restaurant-plum-six-76.vercel.app/">
+          <span class="card-emoji">🍽️</span>
+          <span class="badge">완성</span>
+          <h3 class="card-title">오늘 뭐 먹지</h3>
+          <p class="card-desc">지역과 메뉴, 키워드로 근처 맛집을 찾고 즐겨찾기까지 할 수 있어요.</p>
         </div>
         <div class="card" data-real="4">
           <span class="card-emoji">💗</span>
