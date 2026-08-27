@@ -291,14 +291,14 @@
 
     <div class="carousel-viewport" id="carouselViewport">
       <div class="carousel-track" id="carouselTrack">
-        <!-- clone: Project 08 (맨 앞, 왼쪽 무한루프용) -->
-        <div class="card" data-real="7" aria-hidden="true">
-          <span class="card-emoji">💗</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 08</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        <!-- clone: 레시피 도우미 (맨 앞, 왼쪽 무한루프용) -->
+        <div class="card" data-real="6" data-link="https://recipe-server-aagb.onrender.com" aria-hidden="true">
+          <span class="card-emoji">🍳</span>
+          <span class="badge">완성</span>
+          <h3 class="card-title">레시피 도우미</h3>
+          <p class="card-desc">재료를 검색하고 원하는 레시피를 찾아볼 수 있어요.</p>
         </div>
-        <!-- 실제 카드 1~8 -->
+        <!-- 실제 카드 1~7 -->
         <div class="card" data-real="0" data-link="https://review-index-e3cb.vercel.app/">
           <span class="card-emoji">🍑</span>
           <span class="badge">완성</span>
@@ -323,29 +323,23 @@
           <h3 class="card-title">오늘 뭐 먹지</h3>
           <p class="card-desc">지역과 메뉴, 키워드로 근처 맛집을 찾고 즐겨찾기까지 할 수 있어요.</p>
         </div>
-        <div class="card" data-real="4">
-          <span class="card-emoji">💗</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 05</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        <div class="card" data-real="4" data-link="https://walk-ejwnl5l5g-index-e3cb.vercel.app/">
+          <span class="card-emoji">🚶</span>
+          <span class="badge">완성</span>
+          <h3 class="card-title">산책수집</h3>
+          <p class="card-desc">산책하며 동네에서 발견한 순간들을 기록하고 모아볼 수 있어요.</p>
         </div>
-        <div class="card" data-real="5">
+        <div class="card" data-real="5" data-link="https://mbti-test-seven-pied.vercel.app/">
           <span class="card-emoji">✨</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 06</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+          <span class="badge">완성</span>
+          <h3 class="card-title">MBTI 공부법 연구소</h3>
+          <p class="card-desc">간단한 자가진단 테스트로 MBTI 유형을 확인하고 나에게 맞는 공부법을 찾아볼 수 있어요.</p>
         </div>
-        <div class="card" data-real="6">
-          <span class="card-emoji">🍑</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 07</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
-        </div>
-        <div class="card" data-real="7">
-          <span class="card-emoji">💗</span>
-          <span class="badge">Coming Soon</span>
-          <h3 class="card-title">Project 08</h3>
-          <p class="card-desc">곧 준비될 프로젝트예요. 조금만 기다려 주세요!</p>
+        <div class="card" data-real="6" data-link="https://recipe-server-aagb.onrender.com">
+          <span class="card-emoji">🍳</span>
+          <span class="badge">완성</span>
+          <h3 class="card-title">레시피 도우미</h3>
+          <p class="card-desc">재료를 검색하고 원하는 레시피를 찾아볼 수 있어요.</p>
         </div>
         <!-- clone: Project 01 (맨 뒤, 오른쪽 무한루프용) -->
         <div class="card" data-real="0" data-link="https://review-index-e3cb.vercel.app/" aria-hidden="true">
@@ -368,7 +362,6 @@
     <button class="dot-indicator" data-real="4" aria-label="5번 카드로 이동"></button>
     <button class="dot-indicator" data-real="5" aria-label="6번 카드로 이동"></button>
     <button class="dot-indicator" data-real="6" aria-label="7번 카드로 이동"></button>
-    <button class="dot-indicator" data-real="7" aria-label="8번 카드로 이동"></button>
   </div>
 
   <div class="toast" id="toast">🍑 준비 중입니다!</div>
@@ -378,9 +371,9 @@
   const toast = document.getElementById('toast');
   const viewport = document.getElementById('carouselViewport');
   const track = document.getElementById('carouselTrack');
-  const cards = Array.from(track.children);   // 10 slots: [clone7, 0,1,2,3,4,5,6,7, clone0]
+  const cards = Array.from(track.children);   // 9 slots: [clone6, 0,1,2,3,4,5,6, clone0]
   const dots = Array.from(document.querySelectorAll('.dot-indicator'));
-  const REAL_COUNT = 8;
+  const REAL_COUNT = 7;
 
   let currentSlot = 1;      // 시작: 실제 1번 카드 (slot index 1)
   let isAnimating = false;
@@ -421,7 +414,7 @@
   track.addEventListener('transitionend', (e) => {
     if(e.target !== track || e.propertyName !== 'transform') return;
     if(currentSlot === 0){
-      moveTo(REAL_COUNT, false);       // 왼쪽 클론(08) 도착 → 진짜 08(slot 8)로 순간 이동
+      moveTo(REAL_COUNT, false);       // 왼쪽 클론(07) 도착 → 진짜 07(slot 7)로 순간 이동
     } else if(currentSlot === cards.length - 1){
       moveTo(1, false);                // 오른쪽 클론(01) 도착 → 진짜 01(slot 1)로 순간 이동
     } else {
